@@ -1,0 +1,43 @@
+version: '3'
+services:
+  pybackend:
+    image: langchaintesting
+    container_name: pybackend
+    build:
+      context: ./pybackend
+    env_file:
+      - ./pybackend/.env
+    ports:
+      - 8888:8888
+    volumes:
+      - ./pybackend:/app
+    working_dir: /app
+    command: ["bash"] #jupyter notebook --ip 0.0.0.0 --port 8888 --allow-root --no-browser --NotebookApp.token=''
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+
+  # mud:
+  #   hostname: foundry
+  #   build:
+  #     dockerfile: ./app/Docker/Dockerfile
+  #   platform: linux/amd64
+  #   image: foundry180523-node18.9.1-mud
+  #   container_name: mud
+  #   # build:
+  #   #   context: .
+  #   env_file:
+  #     - .env
+  #   #network_mode: "host"
+  #   # extra_hosts:
+  #   # - "host.docker.internal:host-gateway"
+  #   ports:
+  #     - 0.0.0.0:3333:3333
+  #     - 8080:8080
+  #     - 8888:8888
+  #     - 127.0.0.1:8545:8545
+  #   volumes:
+  #     - ./app:/app
+  #   command: ["sh"]
+  #   working_dir: /app
+  #   stdin_open: true # docker run -i
+  #   tty: true        # docker run -t
